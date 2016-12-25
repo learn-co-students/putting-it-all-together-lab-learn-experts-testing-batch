@@ -59,7 +59,8 @@ export default (state={}, action) => {
           {name:"King of Hearts", value: 10}
         ]
       }
-
+    case 'SET_AI_CARDS':
+      return Object.assign({}, state, action.payload);
     default:
       return state
   }
