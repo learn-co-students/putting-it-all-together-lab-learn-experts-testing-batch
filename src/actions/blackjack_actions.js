@@ -14,15 +14,36 @@ export const setAICards = (state) => {
 }
 
 export const setUserCards = (state) => {
-  return { type:"FETCH_DECK", payload: getTwoRandCard() }
+  const twoCards = getTwoRandCard(state.deck)
+  return { 
+    type:"SET_USER_CARDS", 
+    payload: {
+      userCards: twoCards,
+      deck: removeCardsFromDeck(state.deck, twoCards)
+    }
+  }
 }
 
-export const hitAI = () => {
-  console.log("Hello")
+export const hitAI = (deck) => {
+  const drawnCard = getRandCard(deck)
+  return { 
+    type:"HIT_AI", 
+    payload: {
+      drawnCard: drawnCard,
+      deck: removeCardsFromDeck(state.deck, [drawnCard])
+    }
+  }
 }
 
 export const hitUser = () => {
-  console.log("Hello")
+  const drawnCard = getRandCard(deck)
+  return { 
+    type:"HIT_USER", 
+    payload: {
+      drawnCard: drawnCard,
+      deck: removeCardsFromDeck(state.deck, [drawnCard])
+    }
+  }
 }
 
 const getRandCard = (deck) => {
@@ -41,5 +62,9 @@ const getTwoRandCard = (deck) => {
 }
 
 const removeCardsFromDeck =(deck, cards) => {
-  return deck.filter( c => c.name !== cards[0].name && c.name !== cards[1].name)
+  return deck.filter( deckCard => {
+    return cards.reduce((pre, handCard)=> {
+      return (deckCard.name !== handCard.name) && pre
+    }, true)
+  })
 }
