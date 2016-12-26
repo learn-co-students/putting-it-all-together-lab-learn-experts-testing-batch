@@ -231,7 +231,7 @@ describe('Blackjack:', function(){
       container = mount(<App store={store} />)
     })
 
-    it('should be a class component', function(){
+    it('should not be a class component', function(){
       expect(React.Component.isPrototypeOf(UserBlackjack)).toEqual(false, '`<UserBlackjack />` should be a functional component')
     })
 

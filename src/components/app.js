@@ -22,7 +22,9 @@ class App extends React.Component {
   // }
   
   hitMe(isUser){
-    isUser ? hitUser() : hitAI()
+    const deck = this.props.store.getState().deck;
+    const action = (isUser ? hitUser(deck) : hitAI(deck))
+    this.props.store.dispatch(action);
   }
   
   calculateScore(hand){
@@ -50,12 +52,12 @@ class App extends React.Component {
         <UserBlackjack 
           userCards={userCards}
           hitMe={this.hitMe.bind(null, true)}
-          score={this.calculateUserScore()}
+          score={this.calculateUserScore}
         />
         <AIBlackjack
           aiCards={aiCards}
           hitMe={this.hitMe.bind(null, false)}
-          score={this.calculateAiScore()}
+          score={this.calculateAiScore}
           stay={this.stay}
         />
       </div>

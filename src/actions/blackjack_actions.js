@@ -30,18 +30,18 @@ export const hitAI = (deck) => {
     type:"HIT_AI", 
     payload: {
       drawnCard: drawnCard,
-      deck: removeCardsFromDeck(state.deck, [drawnCard])
+      deck: removeCardsFromDeck(deck, [drawnCard])
     }
   }
 }
 
-export const hitUser = () => {
+export const hitUser = (deck) => {
   const drawnCard = getRandCard(deck)
   return { 
     type:"HIT_USER", 
     payload: {
       drawnCard: drawnCard,
-      deck: removeCardsFromDeck(state.deck, [drawnCard])
+      deck: removeCardsFromDeck(deck, [drawnCard])
     }
   }
 }
