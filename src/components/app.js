@@ -13,18 +13,22 @@ class App extends React.Component {
     this.calculateUserScore = this.calculateUserScore.bind(this);
     this.calculateAiScore = this.calculateAiScore.bind(this);
     this.stay = this.stay.bind(this);
+    this.winner = this.winner.bind(this);
     
-    // this.state = props.store.getState();
+    this.state={winner: undefined}
   }
   
-  // componentWillUpdate(){
-  //   this.state = this.props.store.getState()
-  // }
+  winner(theWinner){
+    this.setState({winner: theWinner})
+  }
   
   hitMe(isUser){
     const deck = this.props.store.getState().deck;
     const action = (isUser ? hitUser(deck) : hitAI(deck))
     this.props.store.dispatch(action);
+    if (this.calculateUserScore() > 21){
+      this.winner("Computer");
+    }
   }
   
   calculateScore(hand){
@@ -42,16 +46,27 @@ class App extends React.Component {
   }
   
   stay(){
-    return (this.calculateAiScore() >= this.calculateUserScore())
+    if(this.calculateUserScore() === 21){
+      this.winner("Player")
+    }else if(this.calculateUserScore() > 21){
+      this.winner("Computer")
+    }else{
+      while(this.calculateAiScore() < this.calculateUserScore()){
+        this.hitMe(false);
+      }
+      (this.calculateAiScore() <= 21) ? this.winner("Computer") : this.winner("Player")
+    }
   }
   
   render(){
     const { userCards, aiCards } = this.props.store.getState()
     return(
       <div>
+        <h1>{this.state.winner ? `The winner is ${this.state.winner}!` : ''}</h1>
         <UserBlackjack 
           userCards={userCards}
           hitMe={this.hitMe.bind(null, true)}
+          stay={this.stay}
           score={this.calculateUserScore}
         />
         <AIBlackjack
