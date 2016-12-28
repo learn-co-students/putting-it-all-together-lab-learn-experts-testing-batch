@@ -7,7 +7,10 @@ const UserBlackjack = props => {
       <h2>
         Score: {props.score()}
       </h2>
-      {props.userCards.map((c, i) => <li key={i}>{c.name}</li>)}
+      <ul>
+        
+        {props.userCards.map((c, i) => <li key={i}>{c.name}</li>)}
+      </ul>
       <button onClick={props.hitMe}>Hit Me</button>
       <button onClick={props.stay}>Stay</button>
     </div>
