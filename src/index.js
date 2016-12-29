@@ -2,8 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import App from './components/app'
+import blackjackReducer from './reducers/blackjack_reducer.js';
+import {fetchDeck, setAICards, setUserCards} from './actions/blackjack_actions.js';
+import {createStore} from './store.js';
+const store = createStore(blackjackReducer);
 
-ReactDOM.render(<App store={store}/>, document.getElementById('container'))
+const render = () => {
+  ReactDOM.render(<App store={store}/>, document.getElementById('container'))
+}
 
 store.subscribe(render)
 store.dispatch(fetchDeck())

@@ -59,8 +59,27 @@ export default (state={}, action) => {
           {name:"King of Hearts", value: 10}
         ]
       }
-
+    case "SET_AI_CARDS":
+      return Object.assign({}, state, {
+        aiCards: action.payload.aiCards,
+        deck: action.payload.deck
+      });
+    case "SET_USER_CARDS":
+      return Object.assign({}, state, {
+        userCards: action.payload.userCards,
+        deck: action.payload.deck
+      });
+    case "USER_HIT_ME":
+      return Object.assign({}, state, {
+        userCards: action.payload.userCards,
+        deck: action.payload.deck
+      });
+    case "AI_HIT_ME":
+      return Object.assign({}, state, {
+        aiCards: action.payload.aiCards,
+        deck: action.payload.deck
+      });
     default:
-      return state
+      return state;
   }
 }

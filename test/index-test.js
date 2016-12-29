@@ -259,7 +259,7 @@ describe('Blackjack:', function(){
 
     it("should have a 'Hit Me' `button` within a `form`", function(){
       const wrapper = mount(<UserBlackjack userCards={store.getState().userCards} score={function(){}}/>)
-      expect(wrapper.find('form').findWhere(n=>n.text() === " Hit Me ").nodes[1].type).toEqual('submit', 'does not have a "Hit Me" submit `button` tag')
+      expect(wrapper.find('form').findWhere(n=>n.text() === "Hit Me").nodes[1].type).toEqual('submit', 'does not have a "Hit Me" submit `button` tag')
     })
 
     it("should have an onSubmit event on the 'Hit Me' `button` `form` that calls the `hitMe()` function from parent component", function(){
@@ -274,7 +274,7 @@ describe('Blackjack:', function(){
       let userCards = wrapper.props().userCards
       wrapper.find('form').at(0).simulate('submit')
       const wrapper2 = mount(<UserBlackjack userCards={store.getState().userCards} score={container.node.calculateUserScore} hitMe={container.node.hitMe}/>)
-      let userScore = wrapper2.props().userCards.reduce((prevCard, currCard) => {return prevCard + currCard.value}, 0)
+      let userScore = wrapper2.props().userCards.reduce((prevCard, currCard) => {return prevCard += currCard.value}, 0)
       let userScoreShow = userScore > 21 ? "BUST" : userScore
       expect(wrapper2.find('ul').text()).toEqual(wrapper2.props().userCards.reduce((prev, curr)=> {return prev + curr.name}, ''), 'does not render new card to page')
       expect(wrapper2.find('h2').text()).toInclude(userScoreShow, 'does not show the right score')
@@ -282,7 +282,7 @@ describe('Blackjack:', function(){
 
     it("should have a 'Stay' `button` within a second `form`", function(){
       const wrapper = mount(<UserBlackjack userCards={store.getState().userCards} score={function(){}}/>)
-      expect(wrapper.find('form').findWhere(n=>n.text() === " Stay ").nodes[1].type).toEqual('submit', 'does not have a "Stay" submit `button` tag')
+      expect(wrapper.find('form').findWhere(n=>n.text() === "Stay").nodes[1].type).toEqual('submit', 'does not have a "Stay" submit `button` tag')
     })
 
     it("should have an onSubmit event on the 'Stay' `button` `form` that calls the `stay()` function from parent component", function(){
