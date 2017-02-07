@@ -277,7 +277,7 @@ describe('Blackjack:', function(){
       let userScore = wrapper2.props().userCards.reduce((prevCard, currCard) => {return prevCard + currCard.value}, 0)
       let userScoreShow = userScore > 21 ? "BUST" : userScore
       expect(wrapper2.find('ul').text()).toEqual(wrapper2.props().userCards.reduce((prev, curr)=> {return prev + curr.name}, ''), 'does not render new card to page')
-      expect(wrapper2.find('h2').text()).toInclude(userScoreShow, 'does not show the right score')
+      expect(wrapper2.find('h2').text()).toInclude(userScoreShow, 'does not show the right score' + userScoreShow + wrapper2.find('h2').text())
     })
 
     it("should have a 'Stay' `button` within a second `form`", function(){
