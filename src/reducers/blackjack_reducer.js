@@ -73,13 +73,13 @@ export default (state={}, action) => {
 
     case 'HIT_USER':
       return Object.assign({}, state, {
-        userCards: [...state.userCards, action.payload.userCard],
+        userCards: action.payload.userCards,
         deck: action.payload.deck
       })
 
     case 'HIT_AI':
       return Object.assign({}, state, {
-        aiCards: [...state.aiCards, action.payload.aiCard],
+        aiCards: action.payload.aiCards,
         deck: action.payload.deck
       })
 

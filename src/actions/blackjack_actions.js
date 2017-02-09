@@ -35,7 +35,7 @@ export function hitUser(state){
   return {
     type: 'HIT_USER',
     payload: {
-      userCard: deck.splice(randomNum(state), 1)[0],
+      userCards: [...state.userCards, deck.splice(randomNum(state), 1)[0]],
       deck: deck
     }
   }
@@ -46,7 +46,7 @@ export function hitAI(state){
   return {
     type: 'HIT_AI',
     payload: {
-      aiCard: deck.splice(randomNum(state), 1)[0],
+      aiCards: [...state.aiCards, deck.splice(randomNum(state), 1)[0]],
       deck: deck
     }
   }
